@@ -12,7 +12,7 @@ Search
 
 <div class="row">
     <div class="col-md-12">
-        <h4>History</h4>
+      
         @foreach($questions as $question)
         <a href="#">
         <article class="question">

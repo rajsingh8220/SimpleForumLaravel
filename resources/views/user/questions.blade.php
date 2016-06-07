@@ -26,7 +26,7 @@ Ask
 </div>
 <div class="row">
     <div class="col-md-12">
-        <h4>History</h4>
+        <h4>You Posts</h4>
         @foreach($questions as $question)
         <article class="question">
             <p style="font-size: 16px;"><i class="glyphicon glyphicon-circle-arrow-right"></i> {{$question->question}}</p>

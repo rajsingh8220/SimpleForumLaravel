@@ -9,11 +9,11 @@ Home:Welcome page
 
 <p>Nullam euismod feugiat erat, a aliquet libero maximus at. Etiam tincidunt lectus at efficitur sodales. Nulla ac euismod ex. Nunc in ipsum nulla. In sit amet nibh nec ligula viverra ultrices semper quis est. Vestibulum sed arcu sit amet massa scelerisque tempor. Fusce vel justo turpis. Cras quam nisi, pretium vel sapien in, hendrerit vulputate tortor. Donec eleifend sem et suscipit porta. Cras lobortis iaculis commodo. Aenean suscipit dignissim tortor nec tempus. Vivamus sapien mi, viverra vel scelerisque ac, convallis vel metus. Sed ipsum enim, ultricies vel iaculis viverra, mollis et elit. Sed interdum, lacus condimentum euismod consectetur, justo massa tincidunt erat, non molestie arcu ligula id augue. Duis ultrices id risus sed volutpat. Donec est ante, viverra quis euismod in, porttitor vitae dui.</p>
 <hr/>
-<h3>Recent Posts</h3>
+<h3>Recent Posts: </h3>
 
 <div class="row">
     <div class="col-md-12">
-        <h4>History</h4>
+       
         @foreach($questions as $question)
         <a href="#">
         <article class="question">
