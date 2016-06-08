@@ -70,20 +70,20 @@ Profile
       <div class="modal-body">
           <div class="form-group">
               <label for="name" >Name</label>
-              <input type="text" value="{{ Auth::user()->name }}" name="name" class="form-control" />
+              <input type="text" value="{{ Auth::user()->name }}" name="name" id="name" class="form-control" />
           </div>
           <div class="form-group">
               <label for="address" >Address</label>
-              <input type="text" value="{{ Auth::user()->address }}" name="address" class="form-control" />
+              <input type="text" value="{{ Auth::user()->address }}" name="address" id="address" class="form-control" />
           </div>
           <div class="form-group">
               <label for="phone" >Phone</label>
-              <input type="text" value="{{ Auth::user()->phone }}" name="phone" class="form-control" />
+              <input type="text" value="{{ Auth::user()->phone }}" name="phone" id="phone" class="form-control" />
           </div>
           
           <div class="form-group">
               <label for="education" >Education</label>
-              <input type="text" value="{{Auth::user()->profile->education}}" name="education" class="form-control" />
+              <input type="text" value="{{Auth::user()->profile->education}}" name="education" id="education" class="form-control" />
           </div>
           <div class="form-group">
               <label for="profession" >Who are you?</label>
@@ -95,11 +95,16 @@ Profile
           </div>
       </div>
       <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save</button>
+          <span id="edit_profile_result"></span>
+          <button type="button" id="saveProfile" class="btn btn-primary">Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
     </form>
   </div>
 </div>
-
+<script type="text/javascript">
+    var token = '{{ Session::token()}}'
+    var user_id = '{{ Auth::user()->id}}'
+    var url = '{{route("edit.profile")}}'
+</script>

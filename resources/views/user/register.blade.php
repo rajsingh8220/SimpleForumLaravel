@@ -31,7 +31,7 @@ Register
             </div>
             <div class="form-group" >
                 <label for="fullname" >Password:</label>
-                <input class="form-control" type="password" name="password" placeholder="Name...." />
+                <input class="form-control" type="password" name="password" placeholder="Password...." />
             </div>
             <div class="form-group" >
                 <label for="fullname" >Re-Password:</label>
@@ -39,7 +39,8 @@ Register
             </div>
             <div class="form-group" >
                 <input type="hidden" name="_token" value="{{ Session::token() }}" />
-                <input class="form-control" type="submit" value="Submit"/>
+                <input class="btn btn-primary" type="submit" value="Submit"/>
+                <a href="{{ route('home') }}" class="btn btn-default">Cancel</a>
             </div>
         </form>
         </div>

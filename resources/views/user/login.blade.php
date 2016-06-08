@@ -10,6 +10,7 @@ Login
 @section('content')
 <div class="row">
     <div class="col-md-12">
+        @include('layout.message')
         <div class="col-lg-6">
             <form  action="{{ route('login') }}" method="post">
                 <div class="form-group" >

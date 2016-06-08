@@ -41,7 +41,7 @@ Ask
             </div>
         </article>
         @endforeach
-        
+        {!! $questions->links() !!}
     </div>
 </div>
 @endsection

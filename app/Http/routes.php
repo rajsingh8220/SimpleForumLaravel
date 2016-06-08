@@ -63,9 +63,15 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile', [
-        'uses'=>'UserController@showProfile',
+        'uses'=>'ProfileController@showProfile',
         'as'=>'profile'
     ]);
+    Route::post('/edit-profile', [
+        'uses'=>'ProfileController@editProfile',
+        'as'=>'edit.profile'
+
+    ]);
+    
     Route::get('/questions', [
         'uses'=>'QuestionController@getQuestion',
         'as'=>'get.question'

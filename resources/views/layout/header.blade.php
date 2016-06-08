@@ -41,10 +41,9 @@
                 <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/settings">Settings</a></li>
+            <li><a href="{{ route('profile')}}">Profile</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="{{ route('logout')}}">Logout</a></li>
           </ul>
         </li>
          @endif

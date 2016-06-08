@@ -38,11 +38,12 @@ class UserController extends Controller{
             $profile->education = '';
             $profile->profession = '';
             $profile->save();
+            $message = "Successfully Registered!";
          }
          catch(Exception $e){
             echo   $e->getMessage(); 
          }
-        return redirect('/');
+        return redirect('/login')->with(['message'=>$message]);
         
     }
     
@@ -68,7 +69,7 @@ class UserController extends Controller{
     }
     
     public function getHome(){
-        $questions = Question::orderBy('created_at','desc')->get();
+        $questions = Question::orderBy('created_at','desc')->paginate(5);
         return view('user.welcome',['questions'=>$questions]);
         //return view('user.welcome');
     }

@@ -13,7 +13,7 @@ Home:Welcome page
 
 <div class="row">
     <div class="col-md-12">
-       
+       {!! $questions->links() !!}
         @foreach($questions as $question)
         <a href="#">
         <article class="question">
@@ -30,6 +30,7 @@ Home:Welcome page
         </article>
         </a>
         @endforeach
+        {!! $questions->links() !!}
     </div>
 </div>
 @endsection
