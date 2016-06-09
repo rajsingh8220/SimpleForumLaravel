@@ -19,13 +19,22 @@ Route::group(['middleware' => ['web']], function () {
 
     ]);
 
-    Route::get('/register', function () {
-        return view('user.register');
-    });
-
-    Route::get('/login', function () {
-        return view('user.login');
-    });
+    
+    
+    
+    
+    
+    Route::get('/register', [
+        'uses'=>'UserController@registerForm',
+        'as'=>'register'
+    ]);
+    Route::get('/login', [
+        'uses'=>'UserController@loginForm',
+        'as'=>'login'
+    ]);
+    
+    
+    
     
     Route::post('/login', [
         'uses'=>'UserController@loginRequest',
@@ -58,6 +67,12 @@ Route::group(['middleware' => ['web']], function () {
     ]);
     
     
+    Route::get('/admin/access-denied', function()
+{
+    return view('admin.denied');
+});
+    
+    
 
 });
 
@@ -87,6 +102,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/questions', [
         'uses'=>'QuestionController@postQuestion',
         'as'=>'post.question'
+
+    ]);
+    
+    Route::post('/upload-profile-pic', [
+        'uses'=>'ProfileController@uploadProfilePic',
+        'as'=>'upload.profile'
+
+    ]);
+});
+
+Route::group(['middleware' => ['admin','auth','web']], function () {
+    Route::get('/admin', [
+        'uses'=>'AdminController@adminIndex',
+        'as'=>'admin'
 
     ]);
 });

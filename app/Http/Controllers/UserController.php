@@ -43,7 +43,8 @@ class UserController extends Controller{
          catch(Exception $e){
             echo   $e->getMessage(); 
          }
-        return redirect('/login')->with(['message'=>$message]);
+        \Session::flash('flash_message','User Registered Successfully');
+        return redirect()->route('login')->with(['message'=>$message]);
         
     }
     
@@ -63,6 +64,12 @@ class UserController extends Controller{
         return view('user.profile');
     }
     
+    public function registerForm(){
+        return view('user.register');
+    }
+    public function loginForm(){
+        return view('user.login');
+    }
     public function logoutRequest(){
         Auth::logout();
         return redirect('/login');

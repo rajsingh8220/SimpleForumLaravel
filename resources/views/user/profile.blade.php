@@ -11,10 +11,11 @@ Profile
 @section('content')
 <div class="row">
     <div class="col-md-12">
+        @include('layout.message')
         @if( Auth::check() )
         <div class="col-md-3" style="text-align: center">
-            <img class="thumbnail" height="200" width="200" src="{{URL::to('img/avatar.jpg')}}" />
-            <a href="#">Change Picture</a>
+            <img class="thumbnail" height="200" width="200" src="{{URL::to('profile_image/')}}/{{Auth::user()->profile->profile_pic}}" />
+            <a data-toggle="modal" data-target="#upload_profile_pic" >Change Picture</a>
         </div>
         <div class="col-md-9" style="padding: 10px">
             <table class="table table-striped">
@@ -50,7 +51,7 @@ Profile
                 </tr>
                  
             </table>
-            <a class="btn btn-primary " data-toggle="modal" data-target="#updateProfile"><i class="glyphicon glyphicon-edit"></i> Update Profile</a>
+            <a class="btn btn-primary " data-toggle="modal" data-target="#update_profile"><i class="glyphicon glyphicon-edit"></i> Update Profile</a>
         </div>
         @endif
     </div>
@@ -58,7 +59,7 @@ Profile
 @endsection
 
 <!-- Modal -->
-<div id="updateProfile" class="modal fade" role="dialog">
+<div id="update_profile" class="modal fade" role="dialog">
   <div class="modal-dialog">
       <form>
     <!-- Modal content-->
@@ -87,11 +88,11 @@ Profile
           </div>
           <div class="form-group">
               <label for="profession" >Who are you?</label>
-              <input type="text" value="{{Auth::user()->profile->profession}}" name="profession" class="form-control" />
+              <input type="text" value="{{Auth::user()->profile->profession}}" name="profession" id="profession" class="form-control" />
           </div>
           <div class="form-group">
               <label for="about" >About You</label>
-              <textarea value="{{Auth::user()->profile->about}}" name="about" class="form-control" ></textarea>
+              <textarea value="{{Auth::user()->profile->about}}" name="about" id="about" class="form-control" ></textarea>
           </div>
       </div>
       <div class="modal-footer">
@@ -103,8 +104,42 @@ Profile
     </form>
   </div>
 </div>
+
+
+<!-- Modal -->
+<div id="upload_profile_pic" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      <form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="" >
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+         <div class="form-group">
+            <label for="catagry_name">Logo</label>
+            <input type="hidden" name="_token" value="{{ Session::token() }}" />
+            <input type="file" name="profile_pic" id="profile_pic">
+            <p class="invalid">Enter Profile Pic.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <span id="upload_profile_result"></span>
+          <button type="button" id="uploadPic" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+
+ 
 <script type="text/javascript">
     var token = '{{ Session::token()}}'
     var user_id = '{{ Auth::user()->id}}'
     var url = '{{route("edit.profile")}}'
+    var uploadURL = '{{route("upload.profile")}}'
+    var loadingIMG = "{{URL::to('img/loading.gif')}}"
 </script>

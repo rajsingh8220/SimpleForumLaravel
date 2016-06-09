@@ -17,6 +17,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a></li>
         <li><a href="{{ url('/questions') }}">Ask</a></li>
+        <li><a href="{{ url('/admin') }}">Admin</a></li>
         
       </ul>
         
