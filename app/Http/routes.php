@@ -116,6 +116,9 @@ Route::group(['middleware' => ['admin','auth','web']], function () {
     Route::get('/admin', [
         'uses'=>'AdminController@adminIndex',
         'as'=>'admin'
-
+    ]);
+    Route::get('/admin-questions', [
+        'uses'=>'AdminController@getQuestion',
+        'as'=>'admin_questions'
     ]);
 });

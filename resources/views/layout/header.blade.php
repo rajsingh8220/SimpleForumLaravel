@@ -15,9 +15,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="{{ url('/questions') }}">Ask</a></li>
-        <li><a href="{{ url('/admin') }}">Admin</a></li>
+        <li class="{{ Request::path() == '/' ? 'active' : '' }}"><a href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a></li>
+        <li class="{{ Request::path() == 'questions' ? 'active' : '' }}"><a href="{{ url('/questions') }}">Ask</a></li>
+        <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{ url('/admin') }}">Admin</a></li>
         
       </ul>
         

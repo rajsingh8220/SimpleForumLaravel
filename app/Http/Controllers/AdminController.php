@@ -8,9 +8,14 @@ use Illuminate\View\Middleware\ErrorBinder;
 
 class AdminController extends Controller{
     public function adminIndex(Request $request){
-        //echo "test";
-        return view('admin.admin');
+        $users = User::orderBy('role', 'desc')->paginate(10);
+        return view('admin.users',['users'=>$users]);
         
+    }
+    
+    public function getQuestion(){
+        $questions = Question::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.questions',['questions'=>$questions]);
     }
     
     

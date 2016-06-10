@@ -76,10 +76,9 @@ class UserController extends Controller{
     }
     
     public function getHome(){
-        $questions = Question::orderBy('created_at','desc')->paginate(5);
+        $questions = Question::where('enabled',1)->orderBy('created_at','desc')->paginate(5);
         return view('user.welcome',['questions'=>$questions]);
         //return view('user.welcome');
     }
-    
-    
+
 }

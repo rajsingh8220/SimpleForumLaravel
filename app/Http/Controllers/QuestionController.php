@@ -23,7 +23,7 @@ class QuestionController extends Controller{
     }
     
     public function getQuestion(){
-        $questions = Question::orderBy('created_at', 'desc')->paginate(3);
+        $questions = Question::where('enabled',1)->orderBy('created_at', 'desc')->paginate(3);
         //$questions = DB::table('questions')->orderBy('created_at', 'desc')->paginate(7);
         return view('user.questions',['questions'=>$questions]);
     }
