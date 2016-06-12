@@ -5,7 +5,6 @@
  */
 
 $(document).ready(function(){
-    //alert("dsf");
    $("#searchBox").keyup(function(){
      var key = $(this).val();
      $("#inner_title").html("Search Result for : '"+key+"'");
@@ -57,4 +56,32 @@ $(document).ready(function(){
        });
                
    })
+   
+   
+    
+    $("#submitComment").click(function(){
+        var question_id = $("#question_id").val();
+        var comment = $("#comment").val();
+        if(comment==''){
+            $("#result_message").html("<b style='color:red;'>Please Enter Comment</b>");
+        }else{
+            $.ajax({
+                type:"POST",
+                url:commentURL,
+                dataType: 'json',
+                data: {user_id:user_id,question_id:question_id,comment:comment,_token:token},
+                success:function(msg){
+                    $("#result_message").html("<b style='color:green;'>Successfully Posted</b>");
+                    $("#commentForm").hide(200);
+                    $('#comments_div').append('<div class="alert alert-info">'+comment+'</div>');
+                    $("#comment").val() = "";
+                },
+                beforeSend:function(d){
+                    $("#result_message").html('<img height="60" width="60" src="'+loadingIMG+'" />');
+                }
+             });  
+        }
+        
+    });
+          
 });

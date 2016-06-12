@@ -34,8 +34,6 @@ Ask
                 Posted by {{$question->user->name}} on {{ date("M d Y",strtotime($question->created_at)) }}
             </div>
             <div style="margin-top: 3px;">
-                <a class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-comment"></i> Comment</a>
-                <a class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>  Edit</a>
                 <a href="{{route('delete.question',['question_id'=>$question->id])}}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>
                
             </div>

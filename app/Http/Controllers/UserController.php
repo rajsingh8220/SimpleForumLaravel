@@ -19,15 +19,12 @@ class UserController extends Controller{
         $phone = $request['phone'];
         $email = $request['email'];
         $password = bcrypt($request['password']);
-        //echo "kjasd";
         $user = new User();
-        //echo "scfd";
         $user->name = $name;
         $user->address = $address;
         $user->phone = $phone;
         $user->email = $email;
         $user->password = $password;
-        //echo "sjlskdjf";
         try{
             $user->save();
             $profile = new Profile();
@@ -53,7 +50,7 @@ class UserController extends Controller{
         echo $request['password'];
         
         if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']])){
-            echo "dfdfdxxxx";
+            //echo "dfdfdxxxx";
             return redirect()->route('profile');
         }
         //echo "sdsd";

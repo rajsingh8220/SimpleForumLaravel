@@ -37,13 +37,16 @@ Admin
                         on {{ date("M d Y",strtotime($question->created_at)) }}
                     </td>
                     <td>
-                        <label class="label {{ $question->enabled == '1' ? 'label-success' : 'label-danger' }}">
+                        <label style="color: {{ $question->enabled == '1' ? '' : 'red' }}">
                             {{ $question->enabled == '1' ? 'active' : 'dasabled' }}
                         </label>
                     </td>
                     <td>
-                        <a href="" class="btn btn-sm btn-success">Enable</a>
-                        <a href="" class="btn btn-sm btn-danger">Disable</a>
+                        @if($question->enabled == '1')
+                        <a href="{{route('enabled.question',['question_id'=>$question->id,'status'=>$question->enabled])}}" class="btn btn-sm btn-danger">Disable</a>
+                        @else
+                         <a href="{{route('enabled.question',['question_id'=>$question->id,'status'=>$question->enabled])}}" class="btn btn-sm btn-success">Enable</a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

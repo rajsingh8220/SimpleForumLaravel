@@ -19,10 +19,7 @@ Route::group(['middleware' => ['web']], function () {
 
     ]);
 
-    
-    
-    
-    
+   
     
     Route::get('/register', [
         'uses'=>'UserController@registerForm',
@@ -76,7 +73,7 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth','web']], function () {
     Route::get('/profile', [
         'uses'=>'ProfileController@showProfile',
         'as'=>'profile'
@@ -98,6 +95,11 @@ Route::group(['middleware' => ['auth']], function () {
         'as'=>'delete.question'
 
     ]);
+    Route::get('/comment/{question_id}', [
+        'uses'=>'QuestionController@commentQuestion',
+        'as'=>'comment.question'
+
+    ]);
     
     Route::post('/questions', [
         'uses'=>'QuestionController@postQuestion',
@@ -110,15 +112,52 @@ Route::group(['middleware' => ['auth']], function () {
         'as'=>'upload.profile'
 
     ]);
+    
+    Route::post('/post-comment', [
+        'uses'=>'QuestionController@postComment',
+        'as'=>'post.comment'
+
+    ]);
 });
 
 Route::group(['middleware' => ['admin','auth','web']], function () {
-    Route::get('/admin', [
-        'uses'=>'AdminController@adminIndex',
-        'as'=>'admin'
+    Route::get('/admin/dashboard', [
+        'uses'=>'AdminController@dashboard',
+        'as'=>'admin_dashboard'
     ]);
-    Route::get('/admin-questions', [
+    Route::get('/admin/users', [
+        'uses'=>'AdminController@adminIndex',
+        'as'=>'admin_users'
+    ]);
+    Route::get('/admin/questions', [
         'uses'=>'AdminController@getQuestion',
         'as'=>'admin_questions'
     ]);
+    
+    Route::get('/admin/report', [
+        'uses'=>'AdminController@report',
+        'as'=>'admin_report'
+    ]);
+    
+    Route::get('/show-user/{user_id}', [
+        'uses'=>'AdminController@showProfile',
+        'as'=>'show.user'
+
+    ]);
+    
+    Route::get('/block-user/{user_id}/{status}', [
+        'uses'=>'AdminController@shuffleStatus',
+        'as'=>'block.user'
+    ]);
+    Route::get('/role-user/{user_id}/{role}', [
+        'uses'=>'AdminController@shuffleUserRole',
+        'as'=>'role.user'
+    ]);
+    
+    Route::get('/question-status/{question_id}/{enabled}', [
+        'uses'=>'AdminController@shuffleQuestionStatus',
+        'as'=>'enabled.question'
+    ]);
+    
+    
 });

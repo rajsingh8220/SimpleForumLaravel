@@ -12,7 +12,8 @@ Register
     <div class="col-md-12">
         @include('layout.message');
         <div class="col-lg-6">
-        <form action="{{ route('register') }}" method="post">
+            <form action="{{ route('register') }}" onsubmit="return checkForm();" method="post">
+                <div id="js_result"></div>
             <div class="form-group" >
                 <label for="fullname" >Full Name:</label>
                 <input class="form-control" name="name" type="text" placeholder="Name" />
@@ -31,11 +32,11 @@ Register
             </div>
             <div class="form-group" >
                 <label for="fullname" >Password:</label>
-                <input class="form-control" type="password" name="password" placeholder="Password...." />
+                <input class="form-control" id="password" type="password" name="password" placeholder="Password...." />
             </div>
             <div class="form-group" >
                 <label for="fullname" >Re-Password:</label>
-                <input class="form-control" type="password" required="" />
+                <input class="form-control"id="re_password" type="password" required="" />
             </div>
             <div class="form-group" >
                 <input type="hidden" name="_token" value="{{ Session::token() }}" />
@@ -49,3 +50,17 @@ Register
 </div>
 @endsection
 
+<script type="text/javascript">
+    function checkForm(){
+        var pass = document.getElementById("password").value;
+        var re_pass = document.getElementById("re_password").value;
+        if(pass==re_pass){
+            return true;
+        }
+        else{
+            
+            document.getElementById("js_result").innerHTML = "<b style='color:red;'>Password did not match</b>"
+            return false;
+        }
+    }
+</script>

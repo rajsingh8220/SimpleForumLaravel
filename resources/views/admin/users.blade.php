@@ -4,7 +4,7 @@ Home:Welcome page
 @endsection
 
 @section('inner_page_title')
-Admin
+Admin - Users
 
 @endsection
 
@@ -18,7 +18,7 @@ Admin
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Sn.</th>
+          
                 <th>Name</th>
                 <th>Email</th>
                 <th>Total Posts</th>
@@ -35,34 +35,41 @@ Admin
                 <?php 
                 $count = $count+1;
                 ?>
-                <tr>
-                    <td><?php echo $count; ?></td>
+            <tr style="color: {{ $user->active==0 ? 'red' : '' }}">
+                    
                     <td>{{$user->name}}</td>
                     <td>
                         {{$user->email}}
                     </td>
                     <td>
-                        <a  class="label label-info">10</a>
+                        <a>
+                        <?php
+                        //The Efficient way will be doing AJAX or getting data from Controller by joining the both table
+                        $results = DB::select('select * from questions where user_id = :id', ['id' => $user->id]);    
+                        echo count($results);
+                        //This is not efficient way sometimes.
+                        ?>
+                        </a>
                     </td>
                     <td>
-                        @if( $user->role=='admin' )
-                        <a href="" class="label label-danger ">{{$user->role}}</a>
-                        @else
-                        <a href="" class="label label-info">{{$user->role}}</a>
-                        @endif
+                        <a href="{{route('role.user',['user_id'=>$user->id,'role'=>$user->role])}}" style="color: {{ $user->role== 'admin' ? 'green' : '' }}">{{$user->role}}</a> 
                     </td>
                     <td>
-                        <a href="" class="btn btn-primary btn-sm">Profile</a>
-                        <a class="btn btn-danger btn-sm">Block</a>
+                        <a href="{{route('show.user',['user_id'=>$user->id])}}" class="btn btn-primary btn-sm">Profile</a>
+                        <a href="{{route('block.user',['user_id'=>$user->id,'status'=>$user->active])}}" class="btn btn-{{ $user->active==1 ? 'danger' : 'success' }} btn-sm">
+                            @if($user->active==1)
+                            Block
+                            @else
+                            Active
+                            @endif
+                        </a>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
-        {!! $users->links() !!}
-        
-        
-        
+        <div class="col-md-12" style="text-align: center">{!! $users->links() !!}</div>
+ 
     </div>
 </div>
 @endsection

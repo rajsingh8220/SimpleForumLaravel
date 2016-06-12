@@ -17,8 +17,11 @@
       <ul class="nav navbar-nav">
         <li class="{{ Request::path() == '/' ? 'active' : '' }}"><a href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a></li>
         <li class="{{ Request::path() == 'questions' ? 'active' : '' }}"><a href="{{ url('/questions') }}">Ask</a></li>
-        <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{ url('/admin') }}">Admin</a></li>
-        
+         @if( Auth::check() )
+        @if(Auth::user()->role=='admin')
+        <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{ url('/admin/dashboard') }}">Admin</a></li>
+        @endif
+        @endif
       </ul>
         
       <form class="navbar-form navbar-left" role="search">
