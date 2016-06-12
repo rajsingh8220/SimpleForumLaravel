@@ -120,7 +120,7 @@ Route::group(['middleware' => ['auth','web']], function () {
     ]);
 });
 
-Route::group(['middleware' => ['admin','auth','web']], function () {
+Route::group(['middleware' => ['admin','auth']], function () {
     Route::get('/admin/dashboard', [
         'uses'=>'AdminController@dashboard',
         'as'=>'admin_dashboard'
